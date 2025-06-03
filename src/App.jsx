@@ -15,6 +15,7 @@ import AkhlakMulia from "./pages/AkhlakMulia";
 import EkonomiRezeki from "./pages/EkonomidanRezeki";
 import Home from "./pages/Home";
 import ScrollToTop from "./components/ScrollToTop";
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const handleScrollToArticles = () => {

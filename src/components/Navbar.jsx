@@ -124,9 +124,18 @@ export default function Navbar() {
             </button>
             <h2>Tentang</h2>
             <p>
-              Website ini dirancang oleh <strong>Moch Nizar Akbar, Dkk.</strong><br />
-              mahasiswa IAIPI Garut semester enam Prodi Ilmu Al-Quran Tafsir.<br />
+            <div style={{ textAlign: "left", margin: "0 0 1em 0" }}>
+              Website ini dirancang oleh:
+              <ol style={{ textAlign: "left", margin: "" }}>
+                <li>Moch Nizar Akbar</li>
+                <li>Muhammad Azzam Zulfan</li>
+                <li>Hafidz Zulfa</li>
+                <li>Mahmud Furqon Ramdani</li>
+                <li>Amroini</li>
+              </ol>
+              Mahasiswa IAIPI Garut semester enam Prodi Ilmu Al-Quran Tafsir.<br />
               Kontak: <a href="mailto:nizarakbar.dev@gmail.com">mochnizar@iaipersisgarut.ac.id</a>
+            </div>
             </p>
             <p>
               Tujuan website ini adalah untuk memudahkan akses Al-Quran dan informasi Islami bagi semua orang.

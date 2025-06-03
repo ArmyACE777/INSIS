@@ -21,28 +21,34 @@ export default function Hero({ onScrollToArticles }) {
   const [idx, setIdx] = React.useState(0);
   const [fade, setFade] = React.useState(true);
   const [direction, setDirection] = React.useState(1); // 1: next, -1: prev
+  const FADE_DURATION = 800; // harus sama dengan CSS transition (ms)
+  const AUTO_SLIDE = 7000;
 
 
   React.useEffect(() => {
-  setFade(false);
-  const fadeTimeout = setTimeout(() => setFade(true), 100);
+  // Timer untuk auto-slide: tunggu AUTO_SLIDE, lalu fade-out, lalu ganti slide
   const timer = setTimeout(() => {
-    setDirection(1);
-    setIdx((idx + 1) % slides.length);
-  }, 7000);
-  return () => {
-    clearTimeout(timer);
-    clearTimeout(fadeTimeout);
-  };
+    setFade(false); // Mulai fade-out
+    const fadeTimer = setTimeout(() => {
+      setIdx((idx + 1) % slides.length); // Setelah fade-out, ganti slide
+      setFade(true); // Fade-in
+    }, FADE_DURATION);
+    // Bersihkan fadeTimer jika idx berubah sebelum FADE_DURATION selesai
+    return () => clearTimeout(fadeTimer);
+  }, AUTO_SLIDE);
+
+  // Bersihkan timer utama jika idx berubah sebelum AUTO_SLIDE selesai
+  return () => clearTimeout(timer);
 }, [idx]);
 
 const goTo = (i) => {
+  if (i === idx) return;
   setDirection(i > idx ? 1 : -1);
   setFade(false);
   setTimeout(() => {
     setIdx(i);
     setFade(true);
-  }, 200);
+  }, FADE_DURATION);
 };
 
   // ...existing code...
@@ -71,8 +77,8 @@ return (
             onClick={() => goTo(i)}
             className={idx === i ? "active" : ""}
             style={{
-              width: 20,
-              height: 20,
+              width: 15,
+              height: 15,
               borderRadius: "50%",
               background: idx === i ? "#43cea2" : "#22313a",
               border: idx === i ? "2px solid #fff" : "2px solid #43cea2",
